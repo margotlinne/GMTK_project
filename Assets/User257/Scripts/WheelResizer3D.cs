@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace User257
 {
-    public class Resizable : MonoBehaviour
+    public class WheelResizer3D : MonoBehaviour
     {
         public bool doResize;
         float wheelAmount;
