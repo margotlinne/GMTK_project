@@ -2,39 +2,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Resizable : MonoBehaviour
+namespace User257
 {
-    public bool doResize;
-    float wheelAmount;
-
-    private void Update()
+    public class Resizable : MonoBehaviour
     {
-        if (Input.GetMouseButton(0))
+        public bool doResize;
+        float wheelAmount;
+
+        private void Update()
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
+            if (Input.GetMouseButton(0))
             {
-                Debug.Log($"resizable object {gameObject.name} is clicked");
-                doResize = true;
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit))
+                {
+                    Debug.Log($"resizable object {gameObject.name} is clicked");
+                    doResize = true;
+                }
             }
+
+            OnResize();
         }
 
-        OnResize();
-    }
+        void OnResize()
+        {
+            if (!doResize)
+                return;
 
-    void OnResize()
-    {
-        if (!doResize)
-            return;
+            if (wheelAmount > 0)
+                Debug.Log($"make {gameObject.name} bigger");
+            else if (wheelAmount < 0)
+                Debug.Log($"make {gameObject.name} smaller");
 
-        if (wheelAmount > 0)
-            Debug.Log($"make {gameObject.name} bigger");
-        else if (wheelAmount < 0)
-            Debug.Log($"make {gameObject.name} smaller");
+            wheelAmount = Input.GetAxis("Mouse ScrollWheel");
 
-        wheelAmount = Input.GetAxis("Mouse ScrollWheel");
-
-        transform.localScale = transform.localScale * (wheelAmount + 1f);
+            transform.localScale = transform.localScale * (wheelAmount + 1f);
+        }
     }
 }
