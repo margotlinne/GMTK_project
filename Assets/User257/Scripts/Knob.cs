@@ -14,25 +14,12 @@ namespace User257
         Selecter selecter;
         MouseProtractor mouseProtractor;
 
-        public Transform sandParent;
-
-        List<Transform> sands = new List<Transform>();
-
-        float curScale = 1f;
-
-        [SerializeField] float scaleAmount = 1f;
-
         private void Awake()
         {
             mouseProtractor = GetComponent<MouseProtractor>();
 
             selecter = GetComponent<Selecter>();
             selecter.OnSelected += UsingKnob;
-
-            for (int i = 0; i < sandParent.childCount; i++)
-            {
-                sands.Add(sandParent.GetChild(i));
-            }
         }
 
         void UsingKnob(bool isSelected)
@@ -62,16 +49,6 @@ namespace User257
                 return; 
 
             transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z + angle.x * -120f);
-
-            ChangeSandScale();
-        }
-
-        void ChangeSandScale()
-        {
-            curScale = -transform.rotation.z * scaleAmount + 1f;
-
-            foreach (Transform element in sands)
-                element.localScale = new Vector3(curScale, curScale, curScale);
         }
     }
 }
