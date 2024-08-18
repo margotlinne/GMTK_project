@@ -20,6 +20,7 @@ namespace Margot
 
         public void Inactive()
         {
+            Debug.Log("box disappears");
             gameObject.SetActive(false);
         }
     }

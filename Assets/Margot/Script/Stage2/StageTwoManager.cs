@@ -32,11 +32,11 @@ namespace Margot
         {
             if (!pickedUpPhone)
             {
-                if (!showBox)
+                if (!showBox && phone == null)
                 {
                     phone = StartCoroutine(ReadyToStart());
                 }
-                else
+                else if (showBox)
                 {
                     boxObj.transform.position = boxPos[0].position;
                     boxObj.SetActive(true);
@@ -46,9 +46,9 @@ namespace Margot
                     {
                         boxObj.GetComponent<InteractionBox>().Disappearing();
                         Destroy(phoneObj);
-                        StopCoroutine(phone);
                         InteractUICanavs.SetActive(true);
                         pickedUpPhone = true;
+                        showBox = false;
                     }
                 }
             }       
@@ -58,6 +58,7 @@ namespace Margot
         {
             yield return new WaitForSeconds(2f);
 
+            Debug.Log("waited");
             showBox = true;
         }
 
