@@ -1,3 +1,4 @@
+using Marogt;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -22,10 +23,18 @@ namespace Margot
 
         public GameObject InteractUICanavs;
 
+        public float distanceToDetect = 0f;
+
         void Start()
         {
             boxObj.SetActive(false);
             InteractUICanavs.SetActive(false);
+
+            // i=0은 게임 시작 시 처음 핸드폰과의 상호작용으로 제외
+            for (int i = 1; i < boxPos.Length; i++)
+            {
+                boxPos[i].GetComponentInChildren<InteractLight>().order = i;
+            }
         }
 
         void Update()
@@ -44,14 +53,20 @@ namespace Margot
 
                     if (interacted)
                     {
-                        boxObj.GetComponent<InteractionBox>().Disappearing();
                         Destroy(phoneObj);
-                        InteractUICanavs.SetActive(true);
                         pickedUpPhone = true;
-                        showBox = false;
+                        HideInteractBox();
                     }
                 }
-            }       
+            }
+
+            if (showBox)
+            {
+                if (interacted)
+                {
+                    HideInteractBox();
+                }
+            }
         }
 
         IEnumerator ReadyToStart()
@@ -62,6 +77,22 @@ namespace Margot
             showBox = true;
         }
 
+        public void ShowInteractBox(int num, string keyCode)
+        {
+            showBox = true;
+
+            boxObj.transform.position = boxPos[num].position;
+            boxObj.SetActive(true);
+            interactKey = keyCode;
+        }
+
+        public void HideInteractBox()
+        {
+            Debug.Log("HideInteractBox called"); // Debug 로그 추가
+            boxObj.GetComponent<InteractionBox>().Disappearing();
+            InteractUICanavs.SetActive(true);
+            showBox = false;
+            interacted = false;
+        }
     }
 }
-

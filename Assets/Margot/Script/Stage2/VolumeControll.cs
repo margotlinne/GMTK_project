@@ -8,6 +8,8 @@ namespace Margot
     {
         public GameObject[] volumeBars;
 
+        public StageTwoManager manager;
+
         void Update()
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -16,6 +18,7 @@ namespace Margot
                 {
                     volumeBars[ActiveVolumeBars() - 1].SetActive(false);
                     Debug.Log("lower volume");
+                    manager.distanceToDetect -= 1f;
                 }
             }
             else  if (Input.GetKeyDown(KeyCode.Alpha2))
@@ -24,6 +27,7 @@ namespace Margot
                 {
                     volumeBars[ActiveVolumeBars()].SetActive(true);
                     Debug.Log("increase volume");
+                    manager.distanceToDetect += 1f;
                 }
             }
         }
