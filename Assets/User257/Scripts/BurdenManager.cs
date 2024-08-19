@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace User257
 {
@@ -34,7 +35,7 @@ namespace User257
 
         public void GameClear()
         {
-            clear.gameObject.SetActive(true);
+            SceneManager.LoadScene("Stage_3_3");
         }
     }
 }

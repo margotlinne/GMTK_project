@@ -7,9 +7,10 @@ using UnityEngine.SceneManagement;
 namespace User257
 {
     [RequireComponent(typeof(Selecter))]
-    public class Seat : MonoBehaviour
+    public class SceneChangeButton : MonoBehaviour
     {
         Selecter selecter;
+        [SerializeField] string sceneName;
 
         private void Awake()
         {
@@ -20,7 +21,7 @@ namespace User257
         void ChangeScene(bool isSelected)
         {
             if (isSelected)
-                SceneManager.LoadScene("Stage_3_Burden");
+                SceneManager.LoadScene(sceneName);
         }
     }
 }
