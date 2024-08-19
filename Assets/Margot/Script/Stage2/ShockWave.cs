@@ -6,17 +6,22 @@ namespace Margot
 {
     public class ShockWave : MonoBehaviour
     {
+
         [SerializeField] private float shockWaveTime = 0.75f;
 
         Coroutine shockWaveCoroutine;
-        Material mateiral;
+        Material _material;
+        Camera mainCamera;
+
+        public Transform player;
+        public Transform shockWaveObj;
 
         private static int waveDistanceFromCenter = Shader.PropertyToID("_WaveDistanceFromCenter");
 
 
         void Awake()
         {
-            mateiral = GetComponent<SpriteRenderer>().material;
+            _material = GetComponent<SpriteRenderer>().material;
         }
 
         public void CallShockWave()
@@ -24,9 +29,13 @@ namespace Margot
             shockWaveCoroutine = StartCoroutine(ShockWaveAction(-0.1f, 1f));
         }
 
+        public void BackToPlayer()
+        {
+            shockWaveObj.position = player.position;
+        }
         IEnumerator ShockWaveAction(float startPos, float endPos)
         {
-            mateiral.SetFloat(waveDistanceFromCenter, startPos);
+            _material.SetFloat(waveDistanceFromCenter, startPos);
 
             float lerpedAmount = 0f;
             float elapsedTime = 0f;
@@ -36,7 +45,9 @@ namespace Margot
                 elapsedTime += Time.deltaTime;
 
                 lerpedAmount = Mathf.Lerp(startPos, endPos, (elapsedTime / shockWaveTime));
-                mateiral.SetFloat(waveDistanceFromCenter, lerpedAmount);
+                _material.SetFloat(waveDistanceFromCenter, lerpedAmount);
+
+                
 
                 yield return null;
             }

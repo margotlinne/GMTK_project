@@ -11,8 +11,12 @@ namespace Margot
         public bool pickedUpPhone = false;
         public bool showBox = false;
         public bool interacted = false;
+        public bool volumeToZero = false;
+        public bool freeze = false;
 
-        public Transform[] boxPos;
+        public Transform[] positiveBoxPos;
+        public Transform[] negativeBoxPos;
+
         public GameObject phoneObj;
         public GameObject boxObj;
 
@@ -23,9 +27,17 @@ namespace Margot
 
         public GameObject InteractUICanavs;
 
-        public float distanceToDetect = 0f;
+        public float distanceToDetect = 5f;
+        public int volumeLevel = 0;
 
+        public GameObject shockWaveObj;
+        [HideInInspector]
         public ShockWave shockWave;
+
+        void Awake()
+        {
+            shockWave = shockWaveObj.GetComponent<ShockWave>();
+        }
 
 
         void Start()
@@ -34,10 +46,17 @@ namespace Margot
             InteractUICanavs.SetActive(false);
 
             // i=0은 게임 시작 시 처음 핸드폰과의 상호작용으로 제외
-            for (int i = 1; i < boxPos.Length; i++)
+            for (int i = 1; i < positiveBoxPos.Length; i++)
             {
-                boxPos[i].GetComponentInChildren<InteractLight>().order = i;
+                positiveBoxPos[i].GetComponentInChildren<InteractLight>().order = i;
+                positiveBoxPos[i].GetComponentInChildren<InteractLight>().isPositive = true;
             }
+
+            //for (int i = 0; i < negativeBoxPos.Length; i++)
+            //{
+            //    negativeBoxPos[i].GetComponentInChildren<InteractLight>().order = i;
+            //    negativeBoxPos[i].GetComponentInChildren<InteractLight>().isPositive = false;
+            //}
         }
 
         void Update()
@@ -50,7 +69,7 @@ namespace Margot
                 }
                 else if (showBox)
                 {
-                    boxObj.transform.position = boxPos[0].position;
+                    boxObj.transform.position = positiveBoxPos[0].position;
                     boxObj.SetActive(true);
                     interactKey = "E";
 
@@ -59,6 +78,7 @@ namespace Margot
                         Destroy(phoneObj);
                         pickedUpPhone = true;
                         HideInteractBox();
+                        interacted = false;
                     }
                 }
             }
@@ -70,6 +90,19 @@ namespace Margot
                     HideInteractBox();
                 }
             }
+
+
+            if (!freeze)
+            {
+                shockWave.BackToPlayer();
+            }
+        }
+
+        public void ShockWaveForInteraction(int order)
+        {
+            //Debug.Log("call shock wave for interaction");
+            shockWaveObj.transform.position = positiveBoxPos[order].position;
+            shockWave.CallShockWave();
         }
 
         IEnumerator ReadyToStart()
@@ -82,20 +115,21 @@ namespace Margot
 
         public void ShowInteractBox(int num, string keyCode)
         {
+           // Debug.Log("_------------------" + keyCode);
             showBox = true;
 
-            boxObj.transform.position = boxPos[num].position;
+            boxObj.transform.position = positiveBoxPos[num].position;
             boxObj.SetActive(true);
             interactKey = keyCode;
+            //interacted = false;
         }
 
         public void HideInteractBox()
         {
-            Debug.Log("HideInteractBox called"); // Debug 로그 추가
+            ///Debug.Log("HideInteractBox called"); 
             boxObj.GetComponent<InteractionBox>().Disappearing();
             InteractUICanavs.SetActive(true);
             showBox = false;
-            interacted = false;
         }
     }
 }
