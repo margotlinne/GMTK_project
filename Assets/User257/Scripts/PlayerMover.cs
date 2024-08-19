@@ -2,26 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMover : MonoBehaviour
+namespace User257
 {
-    [SerializeField] Animator anim;
-    [SerializeField] float speed = 0.01f;
-
-    Vector2 movement;
-
-    private void Update()
+    public class PlayerMover : MonoBehaviour
     {
-        Move();
-    }
+        [SerializeField] Animator anim;
+        [SerializeField] float speed = 0.01f;
 
-    void Move()
-    {
-        movement.x = Input.GetAxis("Horizontal");
-        movement.y = Input.GetAxis("Vertical");
+        [SerializeField] float startPosX;
+        [SerializeField] float endPosX;
 
-        anim.SetFloat("xDir", movement.x);
-        anim.SetFloat("yDir", movement.y);
 
-        transform.position += new Vector3(movement.x * speed, 0f, 0f);
+        Vector2 movement;
+
+        private void Update()
+        {
+            Move();
+        }
+
+        void Move()
+        {
+            movement.x = Input.GetAxis("Horizontal");
+            movement.y = Input.GetAxis("Vertical");
+
+            anim.SetFloat("xDir", movement.x);
+            anim.SetFloat("yDir", movement.y);
+
+            transform.position += new Vector3(movement.x * speed, 0f, 0f);
+
+            //최대 최소 이동 가능한 거리 지정
+            transform.position = new Vector3(Mathf.Clamp(transform.position.x, startPosX, endPosX), transform.position.y, transform.position.z);
+        }
     }
 }
