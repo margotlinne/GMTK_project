@@ -72,3 +72,5 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 /Assets/TextMesh Pro
 /Assets/User257/Material
+/Assets/UniversalRenderPipelineGlobalSettings.asset
+/Assets/UniversalRenderPipelineGlobalSettings.asset.meta

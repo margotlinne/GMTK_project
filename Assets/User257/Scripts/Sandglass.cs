@@ -10,6 +10,7 @@ namespace User257
         [SerializeField] Knob knob;
         [SerializeField] SpriteRenderer knobLight;
         [SerializeField] TMP_Text temp;
+        [SerializeField] GameObject clearText;
 
         public Transform sandParent;
 
@@ -28,6 +29,18 @@ namespace User257
 
             knobLight.color = Color.red;
             temp.text = "unhappy";
+
+            clearText.SetActive(false);
+        }
+
+        private void Start()
+        {
+            knob.OnMouseUp += CheckClear;
+        }
+
+        private void OnDisable()
+        {
+            knob.OnMouseUp -= CheckClear;
         }
 
         private void Update()
@@ -58,6 +71,14 @@ namespace User257
             {
                 knobLight.color = Color.red;
                 temp.text = "unhappy";
+            }
+        }
+
+        void CheckClear()
+        {
+            if(knob.transform.rotation.z >= 0.3f && knob.transform.rotation.z <= 0.4f)
+            {
+                clearText.SetActive(true);
             }
         }
     }

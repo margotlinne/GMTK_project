@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace User257
 {
@@ -13,6 +14,8 @@ namespace User257
 
         Selecter selecter;
         MouseProtractor mouseProtractor;
+
+        public UnityAction OnMouseUp;
 
         private void Awake()
         {
@@ -35,6 +38,7 @@ namespace User257
             if (Input.GetMouseButtonUp(0))
             {
                 usingKnob = false;
+                OnMouseUp?.Invoke();
             }
 
             if (usingKnob)
