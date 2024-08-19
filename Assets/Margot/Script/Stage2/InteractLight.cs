@@ -9,9 +9,12 @@ namespace Marogt
     {
         public GameObject player;
         public StageTwoManager manager;
+        public ShowUpMoments momentImg;
 
         public bool isDetectable = false;
         public bool isPositive = false;
+        public bool isInteracted = false;
+        public bool isFinished = false;
 
         Light2D soundLight;
         Coroutine adjustLight;
@@ -37,50 +40,72 @@ namespace Marogt
             distance = Vector3.Distance(gameObject.transform.position, player.transform.position);
             bool currentlyDetectable = distance <= manager.distanceToDetect;
 
-            if (currentlyDetectable != isDetectable)
+            if (!isFinished)
             {
-                isDetectable = currentlyDetectable;
-
-                // Update target light size based on detectability
-                targetLightSize = isDetectable ? manager.volumeLevel * 1.5f : 0f;
-
-                // Stop any existing coroutine and start a new one to adjust light size
-                if (adjustLightCoroutine != null)
+                if (currentlyDetectable != isDetectable)
                 {
-                    StopCoroutine(adjustLightCoroutine);
+                    isDetectable = currentlyDetectable;
+
+                    // Update target light size based on detectability
+                    targetLightSize = isDetectable ? manager.volumeLevel * 1.5f : 0f;
+
+                    // Stop any existing coroutine and start a new one to adjust light size
+                    if (adjustLightCoroutine != null)
+                    {
+                        StopCoroutine(adjustLightCoroutine);
+                    }
+                    adjustLightCoroutine = StartCoroutine(AdjustLight(targetLightSize));
                 }
-                adjustLightCoroutine = StartCoroutine(AdjustLight(targetLightSize));
-            }
-            else if (isDetectable)
-            {
-                // Update target light size when detectable but no change in detectability
-                targetLightSize = manager.volumeLevel * 1.5f;
+                else if (isDetectable)
+                {
+                    // Update target light size when detectable but no change in detectability
+                    targetLightSize = manager.volumeLevel * 1.5f;
 
-                // Continue adjusting light size to the updated target value
-                if (adjustLightCoroutine != null)
-                {
-                    StopCoroutine(adjustLightCoroutine);
+                    // Continue adjusting light size to the updated target value
+                    if (adjustLightCoroutine != null)
+                    {
+                        StopCoroutine(adjustLightCoroutine);
+                    }
+                    adjustLightCoroutine = StartCoroutine(AdjustLight(targetLightSize));
                 }
-                adjustLightCoroutine = StartCoroutine(AdjustLight(targetLightSize));
-            }
 
-            if (isDetectable && manager.pickedUpPhone)
-            {
-                if (distance <= 3 && manager.volumeLevel == 5)
+                if (isDetectable && manager.pickedUpPhone)
                 {
-                    Debug.Log(order + " time to show box");
-                    manager.ShowInteractBox(order, "E");
+                    if (distance <= 3 && manager.volumeLevel == 5 && isPositive)
+                    {
+                        // Debug.Log(order + " time to show box");
+                        manager.ShowInteractBox(order, "E");
+                    }
+                    else
+                    {
+                        //Debug.Log("hide");
+                        manager.HideInteractBox();
+                    }
                 }
-                else
+                else if (!isDetectable && manager.pickedUpPhone)
                 {
-                    Debug.Log("hide");
+                    //Debug.Log("hide");
                     manager.HideInteractBox();
                 }
             }
-            else if (!isDetectable && manager.pickedUpPhone)
+            
+
+
+            if (isPositive && manager.interacted && !isFinished)
             {
-                Debug.Log("hide");
-                manager.HideInteractBox();
+                adjustLightCoroutine = StartCoroutine(AdjustLight(0f));
+                manager.ShockWaveForInteraction(order);
+                isInteracted = true;
+                isFinished = true;
+                manager.interacted = false;
+                manager.volumeLevel = 0;
+                manager.volumeToZero = true;
+                manager.freeze = true;
+            }
+
+            if (isFinished && manager.freeze)
+            {
+                momentImg.ShowingUpMoment();
             }
         }
 

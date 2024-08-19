@@ -11,9 +11,12 @@ namespace Margot
         public bool pickedUpPhone = false;
         public bool showBox = false;
         public bool interacted = false;
+        public bool volumeToZero = false;
+        public bool freeze = false;
 
         public Transform[] positiveBoxPos;
         public Transform[] negativeBoxPos;
+
         public GameObject phoneObj;
         public GameObject boxObj;
 
@@ -27,7 +30,14 @@ namespace Margot
         public float distanceToDetect = 5f;
         public int volumeLevel = 0;
 
+        public GameObject shockWaveObj;
+        [HideInInspector]
         public ShockWave shockWave;
+
+        void Awake()
+        {
+            shockWave = shockWaveObj.GetComponent<ShockWave>();
+        }
 
 
         void Start()
@@ -68,6 +78,7 @@ namespace Margot
                         Destroy(phoneObj);
                         pickedUpPhone = true;
                         HideInteractBox();
+                        interacted = false;
                     }
                 }
             }
@@ -79,6 +90,19 @@ namespace Margot
                     HideInteractBox();
                 }
             }
+
+
+            if (!freeze)
+            {
+                shockWave.BackToPlayer();
+            }
+        }
+
+        public void ShockWaveForInteraction(int order)
+        {
+            //Debug.Log("call shock wave for interaction");
+            shockWaveObj.transform.position = positiveBoxPos[order].position;
+            shockWave.CallShockWave();
         }
 
         IEnumerator ReadyToStart()
@@ -91,20 +115,21 @@ namespace Margot
 
         public void ShowInteractBox(int num, string keyCode)
         {
+           // Debug.Log("_------------------" + keyCode);
             showBox = true;
 
             boxObj.transform.position = positiveBoxPos[num].position;
             boxObj.SetActive(true);
             interactKey = keyCode;
+            //interacted = false;
         }
 
         public void HideInteractBox()
         {
-            Debug.Log("HideInteractBox called"); // Debug 로그 추가
+            ///Debug.Log("HideInteractBox called"); 
             boxObj.GetComponent<InteractionBox>().Disappearing();
             InteractUICanavs.SetActive(true);
             showBox = false;
-            interacted = false;
         }
     }
 }

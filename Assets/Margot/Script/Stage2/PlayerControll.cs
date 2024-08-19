@@ -36,7 +36,7 @@ namespace stageTwo
                 gameStarted = true;
             }
 
-            if (gameStarted)
+            if (gameStarted && !manager.freeze)
             {
                 float moveInput = Input.GetAxisRaw("Horizontal");
                 anim.SetFloat("Vertical", moveInput);
@@ -53,36 +53,11 @@ namespace stageTwo
                 {
                     isWalking = false;
                     anim.SetBool("Walking", false);
-                }
-
-                //if (isWalking) 
-                //{
-                //    if (moveInput < 0)
-                //    {
-                //        anim.SetBool("WalkingL", true);
-                //        anim.SetBool("WalkingR", false);
-                //    }
-                //    else if (moveInput > 0)
-                //    {
-                //        anim.SetBool("WalkingL", false);
-                //        anim.SetBool("WalkingR", true);
-                //    }
-                //}
-
-                //else
-                //{
-                //    anim.SetBool("WalkingL", false);
-                //    anim.SetBool("WalkingR", false);
-
-                //    anim.SetTrigger("Idle");
-                //}
-                
+                }    
 
             }
 
-
-
-            else if (manager.showBox)
+            if (manager.showBox)
             {
                 KeyCode keycode = GetKeyCodeFromString(manager.interactKey);
 

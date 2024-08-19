@@ -40,6 +40,16 @@ namespace Margot
                     phoneAnim.VolumeUpAnimation();
                 }
             }
+
+
+            if (manager.volumeToZero)
+            {
+                for (int i = 0; i < volumeBars.Length; i++)
+                {
+                    volumeBars[i].SetActive(false);
+                }
+                manager.volumeToZero = false;
+            }
         }
 
         int ActiveVolumeBars()

@@ -13,6 +13,9 @@ namespace Margot
         Material _material;
         Camera mainCamera;
 
+        public Transform player;
+        public Transform shockWaveObj;
+
         private static int waveDistanceFromCenter = Shader.PropertyToID("_WaveDistanceFromCenter");
 
 
@@ -26,6 +29,10 @@ namespace Margot
             shockWaveCoroutine = StartCoroutine(ShockWaveAction(-0.1f, 1f));
         }
 
+        public void BackToPlayer()
+        {
+            shockWaveObj.position = player.position;
+        }
         IEnumerator ShockWaveAction(float startPos, float endPos)
         {
             _material.SetFloat(waveDistanceFromCenter, startPos);
@@ -39,6 +46,8 @@ namespace Margot
 
                 lerpedAmount = Mathf.Lerp(startPos, endPos, (elapsedTime / shockWaveTime));
                 _material.SetFloat(waveDistanceFromCenter, lerpedAmount);
+
+                
 
                 yield return null;
             }
