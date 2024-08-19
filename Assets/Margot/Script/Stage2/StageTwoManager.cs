@@ -25,6 +25,9 @@ namespace Margot
 
         public float distanceToDetect = 0f;
 
+        public ShockWave shockWave;
+
+
         void Start()
         {
             boxObj.SetActive(false);

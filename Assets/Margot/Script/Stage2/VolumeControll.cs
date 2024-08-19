@@ -19,6 +19,7 @@ namespace Margot
                     volumeBars[ActiveVolumeBars() - 1].SetActive(false);
                     Debug.Log("lower volume");
                     manager.distanceToDetect -= 1f;
+                    manager.shockWave.CallShockWave();
                 }
             }
             else  if (Input.GetKeyDown(KeyCode.Alpha2))
@@ -28,6 +29,7 @@ namespace Margot
                     volumeBars[ActiveVolumeBars()].SetActive(true);
                     Debug.Log("increase volume");
                     manager.distanceToDetect += 1f;
+                    manager.shockWave.CallShockWave();
                 }
             }
         }
