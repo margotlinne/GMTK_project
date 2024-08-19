@@ -41,3 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: CameraSortingLayer
+    uniqueID: 573990059
+    locked: 0
+  - name: UILayer
+    uniqueID: 3896312389
+    locked: 0
