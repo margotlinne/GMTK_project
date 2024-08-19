@@ -12,7 +12,8 @@ namespace Margot
         public bool showBox = false;
         public bool interacted = false;
 
-        public Transform[] boxPos;
+        public Transform[] positiveBoxPos;
+        public Transform[] negativeBoxPos;
         public GameObject phoneObj;
         public GameObject boxObj;
 
@@ -23,7 +24,8 @@ namespace Margot
 
         public GameObject InteractUICanavs;
 
-        public float distanceToDetect = 0f;
+        public float distanceToDetect = 5f;
+        public int volumeLevel = 0;
 
         public ShockWave shockWave;
 
@@ -34,10 +36,17 @@ namespace Margot
             InteractUICanavs.SetActive(false);
 
             // i=0은 게임 시작 시 처음 핸드폰과의 상호작용으로 제외
-            for (int i = 1; i < boxPos.Length; i++)
+            for (int i = 1; i < positiveBoxPos.Length; i++)
             {
-                boxPos[i].GetComponentInChildren<InteractLight>().order = i;
+                positiveBoxPos[i].GetComponentInChildren<InteractLight>().order = i;
+                positiveBoxPos[i].GetComponentInChildren<InteractLight>().isPositive = true;
             }
+
+            //for (int i = 0; i < negativeBoxPos.Length; i++)
+            //{
+            //    negativeBoxPos[i].GetComponentInChildren<InteractLight>().order = i;
+            //    negativeBoxPos[i].GetComponentInChildren<InteractLight>().isPositive = false;
+            //}
         }
 
         void Update()
@@ -50,7 +59,7 @@ namespace Margot
                 }
                 else if (showBox)
                 {
-                    boxObj.transform.position = boxPos[0].position;
+                    boxObj.transform.position = positiveBoxPos[0].position;
                     boxObj.SetActive(true);
                     interactKey = "E";
 
@@ -84,7 +93,7 @@ namespace Margot
         {
             showBox = true;
 
-            boxObj.transform.position = boxPos[num].position;
+            boxObj.transform.position = positiveBoxPos[num].position;
             boxObj.SetActive(true);
             interactKey = keyCode;
         }

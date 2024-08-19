@@ -9,6 +9,7 @@ namespace Margot
         public GameObject[] volumeBars;
 
         public StageTwoManager manager;
+        public PhoneAnim phoneAnim;
 
         void Update()
         {
@@ -18,8 +19,11 @@ namespace Margot
                 {
                     volumeBars[ActiveVolumeBars() - 1].SetActive(false);
                     Debug.Log("lower volume");
-                    manager.distanceToDetect -= 1f;
+                    //manager.distanceToDetect -= 1f;
+                    manager.volumeLevel -= 1;
                     manager.shockWave.CallShockWave();
+
+                    phoneAnim.VolumeDownAnimation();
                 }
             }
             else  if (Input.GetKeyDown(KeyCode.Alpha2))
@@ -28,8 +32,12 @@ namespace Margot
                 {
                     volumeBars[ActiveVolumeBars()].SetActive(true);
                     Debug.Log("increase volume");
-                    manager.distanceToDetect += 1f;
+                    //manager.distanceToDetect += 1f;
+
+                    manager.volumeLevel += 1;
                     manager.shockWave.CallShockWave();
+
+                    phoneAnim.VolumeUpAnimation();
                 }
             }
         }

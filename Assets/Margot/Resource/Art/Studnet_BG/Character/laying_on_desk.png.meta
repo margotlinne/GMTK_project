@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2dfd3ea9a4980354ab29444ecd7cb780
+guid: 603fece182d44a443957eb26b52993b2
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -43,11 +43,11 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 9
-  spritePivot: {x: 0.4926202, y: 0.5994152}
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -108,18 +108,45 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: laying_on_desk_0
+      rect:
+        serializedVersion: 2
+        x: 377
+        y: 89
+        width: 316
+        height: 480
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09af2c847f123fe448ef85ff164539cf
+      internalID: 163460242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      laying_on_desk_0: 163460242
+      laying_on_desk_1: 1924099650
+      laying_on_desk_2: -1191637867
+      laying_on_desk_3: -1979203331
+      laying_on_desk_4: -1199196159
+      laying_on_desk_5: -568106309
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
