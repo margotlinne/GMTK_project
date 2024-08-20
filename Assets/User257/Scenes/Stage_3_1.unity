@@ -127,7 +127,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8585199707726556735, guid: 643ae7e94f28fe647805c77726410310, type: 3}
   m_PrefabInstance: {fileID: 1476503330}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &493706026
+--- !u!1001 &173003442
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -218,6 +218,10 @@ PrefabInstance:
     - target: {fileID: 186056952549485430, guid: 559a67f4a8d970b4d8c72199310667c7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2686071894049189739, guid: 559a67f4a8d970b4d8c72199310667c7, type: 3}
+      propertyPath: m_Camera
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1016,4 +1020,4 @@ SceneRoots:
   - {fileID: 1910836674}
   - {fileID: 2050793789}
   - {fileID: 2006153745}
-  - {fileID: 493706026}
+  - {fileID: 173003442}
