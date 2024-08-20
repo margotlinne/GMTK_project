@@ -36,6 +36,8 @@ namespace User257
 
         public UnityAction<int> OnChangeRound;
 
+        [SerializeField] GameObject light_sandglass;
+
         private void Awake()
         {
             for (int i = 0; i < sandParent.childCount; i++)
@@ -47,6 +49,8 @@ namespace User257
 
             face_normal.SetActive(true);
             face_good.SetActive(false);
+
+            light_sandglass.SetActive(false);
         }
 
         private void Start()
@@ -125,6 +129,7 @@ namespace User257
                 face_normal.SetActive(false);
                 face_good.SetActive(true);
 
+                light_sandglass.SetActive(true);
                 Debug.Log("Clear");
             }
         }
