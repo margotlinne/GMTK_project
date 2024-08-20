@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 namespace Margot
 {
@@ -36,6 +37,7 @@ namespace Margot
 
         public void SetEnvironment()
         {
+            SfxManager.instance.ShockwavePosSoundPlay();
 
             // 뒷 배경색 밝게 변화
 
@@ -60,14 +62,21 @@ namespace Margot
             // 시각화된 긍정적 상호작용 비활성화
             manager.hideInteractions = true;
 
-            SfxManager.instance.Stage2AfterClear();
 
+        }
+
+        public void SoundPlay()
+        {
+
+            SfxManager.instance.Stage2AfterClear();
         }
 
 
         public void ToNextStage()
         {
             // 다음 씬으로
+            GameManager.Instance.SetStageClear(GameManager.Stage.Student);
+            SceneManager.LoadScene("StageSelection_User257");
         }
     }
 

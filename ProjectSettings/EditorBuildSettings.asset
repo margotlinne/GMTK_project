@@ -8,4 +8,28 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Margot/Scene/MainMenu.unity
     guid: 64986fba26a9f1e498e2ad8c26fab445
+  - enabled: 1
+    path: Assets/User257/Scenes/StageSelection_User257.unity
+    guid: 785d509b04946c147914933d2a5f9c14
+  - enabled: 1
+    path: Assets/Choi/Scene/Stage1.unity
+    guid: 73319841009dca147be9eea73d896a54
+  - enabled: 1
+    path: Assets/Margot/Scene/Stage_2.unity
+    guid: f8a5feebeda881b4c887ddb0be21aadb
+  - enabled: 1
+    path: Assets/User257/Scenes/Stage_3_1.unity
+    guid: 5d29c1bf4c58dbc4fafc64a0becc740c
+  - enabled: 1
+    path: Assets/User257/Scenes/Stage_3_2.unity
+    guid: e6104c98e953a414dbc62a34f7bccb5a
+  - enabled: 1
+    path: Assets/User257/Scenes/Stage_3_3.unity
+    guid: d08d65ee4747ed34c87129dbeb6acd9a
+  - enabled: 1
+    path: Assets/User257/Scenes/Stage_3_4.unity
+    guid: ce2f3148c492ce44daaaac7370f4d591
+  - enabled: 1
+    path: Assets/Margot/Scene/Credit.unity
+    guid: 89ce831a0d1712a47a0bbaedd8d34164
   m_configObjects: {}
