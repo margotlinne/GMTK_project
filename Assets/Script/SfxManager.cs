@@ -69,19 +69,10 @@ public class SfxManager : MonoBehaviour
         BareFootSoundClip = Resources.Load<AudioClip>("Stage1/Sfx_BareFtstp_01");
         NightAmbSoundClip = Resources.Load<AudioClip>("Stage1/Amb_Night");
 
-        if (VolUpSoundClip == null)
-        {
-            Debug.Log("우하하하하히");
-        }
+        
     }
 
     
-    public void Stage2AfterClear()
-    {
-        audioSource.clip = ClassRoomAmbSoundClip; 
-    }
-
-
 
 
     /*

@@ -22,6 +22,7 @@ namespace Margot
 
         public StageTwoManager manager;
         public GameObject footStepSoundObj;
+        public GameObject breathingSoundObj;
 
         void Awake()
         {
@@ -80,11 +81,13 @@ namespace Margot
             if (manager.interactingWNegativeLight)
             {
                 anim.SetBool("Shivering", true);
+                breathingSoundObj.SetActive(true);
                 manager.freeze = true;
             }
             else
             {
                 anim.SetBool("Shivering", false);
+                breathingSoundObj.SetActive(false);
                 manager.freeze = false;
             }
 

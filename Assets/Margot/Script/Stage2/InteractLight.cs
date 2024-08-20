@@ -35,6 +35,9 @@ namespace Marogt
         bool changedValueForManager = false;
         bool hidKeyBox = false;
 
+
+        public GameObject soundObj;
+
         void Awake()
         {
             soundLight = GetComponent<Light2D>();
@@ -61,7 +64,7 @@ namespace Marogt
                     }
                     adjustLightCoroutine = StartCoroutine(AdjustLight(targetLightSize));
                 }
-                else if (isDetectable && isPositive)
+                else if (isDetectable)
                 {
                     // Update target light size when detectable but no change in detectability
 
@@ -158,6 +161,15 @@ namespace Marogt
                 }
             }
 
+
+            if (isDetectable && !isFinished)
+            {
+                soundObj.SetActive(true);
+            }
+            else if (!isDetectable || isFinished)
+            {
+                soundObj.SetActive(false);
+            }
 
         }
 
