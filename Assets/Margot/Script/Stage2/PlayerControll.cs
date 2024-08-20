@@ -5,29 +5,61 @@ using UnityEditor;
 using UnityEngine;
 using static System.Runtime.CompilerServices.RuntimeHelpers;
 
-namespace stageTwo
+namespace Margot
 {
     public class PlayerControll : MonoBehaviour
     {
         Rigidbody2D rb;
+        Animator anim;
+
         [SerializeField]
         float speed;
+
+        [SerializeField]
+        bool isWalking;
+
+        bool gameStarted = false;
 
         public StageTwoManager manager;
 
         void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
+            anim = GetComponent<Animator>();
         }
 
         void Update()
         {
-            if (manager.pickedUpPhone)
+            if (manager.pickedUpPhone && !gameStarted)
+            {
+                anim.SetTrigger("StartedGame");
+                gameStarted = true;
+            }
+
+            if (gameStarted && !manager.freeze)
             {
                 float moveInput = Input.GetAxisRaw("Horizontal");
+                anim.SetFloat("Vertical", moveInput);
+
                 rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
+
+                //Debug.Log(rb.velocity);
+
+
+                if (moveInput != 0)
+                {
+                    isWalking = true;
+                    anim.SetBool("Walking", true);
+                }
+                else
+                {
+                    isWalking = false;
+                    anim.SetBool("Walking", false);
+                }    
+
             }
-            else if (manager.showBox)
+
+            if (manager.showBox)
             {
                 KeyCode keycode = GetKeyCodeFromString(manager.interactKey);
 
@@ -37,16 +69,22 @@ namespace stageTwo
                     manager.interacted = true;
                 }
             }
-        }
 
-        void CheckInteractionKey(string val)
-        {
-            if (val == "E")
+
+
+            if (manager.interactingWNegativeLight)
             {
-
+                anim.SetBool("Shivering", true);
+                manager.freeze = true;
             }
+            else
+            {
+                anim.SetBool("Shivering", false);
+                manager.freeze = false;
+            }
+
         }
-        
+
 
         KeyCode GetKeyCodeFromString(string key)
         {
@@ -56,7 +94,7 @@ namespace stageTwo
             {
                 return keyCode;
             }
-            return KeyCode.None; // À¯È¿ÇÏÁö ¾ÊÀº Å° ÄÚµå
+            return KeyCode.None; // ï¿½ï¿½È¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å° ï¿½Úµï¿½
 
         }
     }

@@ -30,7 +30,7 @@ namespace User257
         int wholeRound = 3;
 
         /// <summary>
-        /// ´ÙÀÌ¾ó ·ÎÅ×ÀÌ¼Ç Å¸ÀÌ¹Ö
+        /// ë‹¤ì´ì–¼ ë¡œí…Œì´ì…˜ íƒ€ì´ë°
         /// </summary>
         [SerializeField] float[] timing;
 
@@ -97,7 +97,7 @@ namespace User257
 
         void ChangeEmotion()
         {
-            if (knob.transform.rotation.z >= timing[curRound] && knob.transform.rotation.z <= timing[curRound] + 0.1f) //0.1f Á¤µµÀÇ Çã¿ë¹üÀ§
+            if (knob.transform.rotation.z >= timing[curRound] && knob.transform.rotation.z <= timing[curRound] + 0.1f) //0.1f ì •ë„ì˜ í—ˆìš©ë²”ìœ„
             {
                 knobLight.color = Color.green;
                 face_normal.SetActive(false);
@@ -129,14 +129,16 @@ namespace User257
                 face_normal.SetActive(false);
                 face_good.SetActive(true);
 
+
                 light_sandglass.SetActive(true);
+
                 Debug.Log("Clear");
             }
         }
 
         void Restart()
         {
-            SceneManager.LoadScene("Stage_3_4"); //½ÇÆĞÇÏ¸é ¾À Àç½ÃÀÛ
+            SceneManager.LoadScene("Stage_3_4"); //ì‹¤íŒ¨í•˜ë©´ ì”¬ ì¬ì‹œì‘
         }
 
         void CheckFail()
