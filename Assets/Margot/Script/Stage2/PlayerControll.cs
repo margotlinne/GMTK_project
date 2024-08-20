@@ -43,6 +43,8 @@ namespace stageTwo
 
                 rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
 
+                //Debug.Log(rb.velocity);
+
 
                 if (moveInput != 0)
                 {
@@ -67,6 +69,20 @@ namespace stageTwo
                     manager.interacted = true;
                 }
             }
+
+
+
+            if (manager.interactingWNegativeLight)
+            {
+                anim.SetBool("Shivering", true);
+                manager.freeze = true;
+            }
+            else
+            {
+                anim.SetBool("Shivering", false);
+                manager.freeze = false;
+            }
+
         }
 
 

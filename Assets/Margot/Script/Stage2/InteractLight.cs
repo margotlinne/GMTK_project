@@ -14,7 +14,10 @@ namespace Marogt
         public bool isDetectable = false;
         public bool isPositive = false;
         public bool isInteracted = false;
-        public bool isFinished = false;
+        public bool deleteLight = false;
+
+
+        bool isFinished = false;
 
         Light2D soundLight;
         Coroutine adjustLight;
@@ -59,6 +62,7 @@ namespace Marogt
                 else if (isDetectable)
                 {
                     // Update target light size when detectable but no change in detectability
+
                     targetLightSize = manager.volumeLevel * 1.5f;
 
                     // Continue adjusting light size to the updated target value
@@ -69,27 +73,39 @@ namespace Marogt
                     adjustLightCoroutine = StartCoroutine(AdjustLight(targetLightSize));
                 }
 
-                if (isDetectable && manager.pickedUpPhone)
+                // 부정적 소리의 스크립트에서 거리가 멀 때 키박스를 감추게 해서 계속 사라졌다 떴다 하는 오류가 떴던 것
+                if (isDetectable && manager.pickedUpPhone && isPositive)
                 {
-                    if (distance <= 3 && manager.volumeLevel == 5 && isPositive)
+                    if (distance <= 3 && manager.volumeLevel == 5)
                     {
-                        // Debug.Log(order + " time to show box");
+                         Debug.Log(order + " time to show box");
                         manager.ShowInteractBox(order, "E");
                     }
                     else
                     {
-                        //Debug.Log("hide");
+                        Debug.Log("hide");
                         manager.HideInteractBox();
                     }
                 }
-                else if (!isDetectable && manager.pickedUpPhone)
+                else if (!isDetectable && manager.pickedUpPhone && isPositive)
                 {
                     //Debug.Log("hide");
                     manager.HideInteractBox();
                 }
+
+                if (isDetectable && !isPositive && !isFinished)
+                {
+                    manager.withNegativeLight = true;
+                }
+                else if ((!isDetectable && !isPositive) || (isPositive && isDetectable))
+                {
+                    manager.withNegativeLight = false;
+                }
+
+
             }
             
-
+            // positive light --------------------
 
             if (isPositive && manager.interacted && !isFinished)
             {
@@ -99,14 +115,36 @@ namespace Marogt
                 isFinished = true;
                 manager.interacted = false;
                 manager.volumeLevel = 0;
+                manager.interactedNum++;
+                manager.IncreaseBGLight();
                 manager.volumeToZero = true;
                 manager.freeze = true;
             }
 
-            if (isFinished && manager.freeze)
+            if (isFinished && manager.freeze && isPositive)
             {
                 momentImg.ShowingUpMoment();
             }
+
+
+            // negative light ---------------------
+            // 플레이어가 부정적 빛과 상호작용하고 있으며 해당 빛이 감지 가능한 거리에 있을 때 즉 해당 빛과 상호작용 중일 때
+            if (!isPositive && manager.interactingWNegativeLight && isDetectable)
+            {
+                deleteLight = true;
+            }
+
+            if (deleteLight)
+            {
+                // 상호작용 후에 붉은 배경이 원래대로 돌아왔다면 부정적 상호작용이 끝난 상태
+                if (manager.warningBG.color.a == 0)
+                {
+                    isFinished = true;
+                    manager.withNegativeLight = false;
+                }
+            }
+
+
         }
 
         IEnumerator AdjustLight(float target)

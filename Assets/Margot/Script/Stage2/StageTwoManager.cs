@@ -2,7 +2,10 @@ using Marogt;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.UI;
 
 namespace Margot
 {
@@ -13,6 +16,8 @@ namespace Margot
         public bool interacted = false;
         public bool volumeToZero = false;
         public bool freeze = false;
+        public bool withNegativeLight = false;
+        public bool interactingWNegativeLight = false;
 
         public Transform[] positiveBoxPos;
         public Transform[] negativeBoxPos;
@@ -34,6 +39,14 @@ namespace Margot
         [HideInInspector]
         public ShockWave shockWave;
 
+        public int interactedNum = 0;
+
+        public Light2D bgLight;
+
+        public float brightnessUpStrength = 5f;
+
+        public Image warningBG;
+
         void Awake()
         {
             shockWave = shockWaveObj.GetComponent<ShockWave>();
@@ -52,11 +65,11 @@ namespace Margot
                 positiveBoxPos[i].GetComponentInChildren<InteractLight>().isPositive = true;
             }
 
-            //for (int i = 0; i < negativeBoxPos.Length; i++)
-            //{
-            //    negativeBoxPos[i].GetComponentInChildren<InteractLight>().order = i;
-            //    negativeBoxPos[i].GetComponentInChildren<InteractLight>().isPositive = false;
-            //}
+            for (int i = 0; i < negativeBoxPos.Length; i++)
+            {
+                negativeBoxPos[i].GetComponentInChildren<InteractLight>().order = i;
+                negativeBoxPos[i].GetComponentInChildren<InteractLight>().isPositive = false;
+            }
         }
 
         void Update()
@@ -96,6 +109,41 @@ namespace Margot
             {
                 shockWave.BackToPlayer();
             }
+
+            if (warningBG.color.a > 0)
+            {
+                interactingWNegativeLight = true;
+            }
+            else if (warningBG.color.a == 0)
+            {
+                interactingWNegativeLight = false;
+            }
+        }
+
+        public void AdjustWarningBGColour(float val, bool isIncreasing)
+        {
+            // 알파 값이 0이었기 때문에 (아래 배경 빛 조정 때와 마찬가지) 아무 변화 없는것처럼 보였던 것
+            // 곱셈에서 덧셈으로 바꿈
+            Color newColor = warningBG.color;
+            if (isIncreasing)
+            {
+                newColor.a += val;
+            }
+            else
+            {
+                newColor.a -= val;
+            }
+            warningBG.color = newColor;
+        }
+
+
+        public void IncreaseBGLight()
+        {
+            Color lightColor = bgLight.color;
+            lightColor.r *= brightnessUpStrength;
+            lightColor.g *= brightnessUpStrength;
+            lightColor.b *= brightnessUpStrength;
+            bgLight.color = lightColor;
         }
 
         public void ShockWaveForInteraction(int order)

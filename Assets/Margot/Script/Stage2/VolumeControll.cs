@@ -11,6 +11,9 @@ namespace Margot
         public StageTwoManager manager;
         public PhoneAnim phoneAnim;
 
+
+        public float warningBGAdjustSize = 0.15f;
+
         void Update()
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -24,6 +27,12 @@ namespace Margot
                     manager.shockWave.CallShockWave();
 
                     phoneAnim.VolumeDownAnimation();
+
+                    if (manager.withNegativeLight)
+                    {
+                        Debug.Log("---volume down next to negative sound");
+                        manager.AdjustWarningBGColour(warningBGAdjustSize, false);
+                    }
                 }
             }
             else  if (Input.GetKeyDown(KeyCode.Alpha2))
@@ -38,6 +47,13 @@ namespace Margot
                     manager.shockWave.CallShockWave();
 
                     phoneAnim.VolumeUpAnimation();
+
+
+                    if (manager.withNegativeLight)
+                    {
+                        Debug.Log("---volume up next to negative sound");
+                        manager.AdjustWarningBGColour(warningBGAdjustSize, true);
+                    }
                 }
             }
 
