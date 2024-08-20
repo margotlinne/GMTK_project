@@ -9,12 +9,14 @@ namespace Choi
     {
         public bool simulated = false;
         public bool hold = false;
+        public GameObject interaction;
         Animator anim;
         Rigidbody2D rb;
         [SerializeField]
         float moveSpeed;
+        
 
-        Toy_Interaction onhand_toy;
+        Toy_Interaction onhand_toy = null;
 
         void Start()
         {
@@ -69,8 +71,7 @@ namespace Choi
         {
             if (collision.gameObject.layer == 7 && hold)
             {
-                // 상호작용 키 활성화 함수 or 코루틴
-                if (Input.GetKeyDown(KeyCode.E))
+                if (Input.GetKey(KeyCode.E))
                 {
                     GameObject go = onhand_toy.shelf_Toy;
                     Color color = go.GetComponent<SpriteRenderer>().color;
@@ -79,6 +80,7 @@ namespace Choi
                     go.GetComponent<SpriteOutline>().outlineSize = 0;
                     Destroy(onhand_toy.gameObject);
                     hold = false;
+                    onhand_toy = null;
                     GameObject.Find("Spider_Monster").gameObject.GetComponent<Spider_Monster>().Weak();
                 }
             }

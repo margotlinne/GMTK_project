@@ -25,7 +25,7 @@ public class Spider_Monster : MonoBehaviour
         {
             spider_toy.SetActive(true);
             Destroy(this.gameObject);
-            GameObject.Find("Maps").GetComponent<Light2D>().intensity += 0.1f;
+            GameObject.Find("Maps").GetComponent<Light2D>().intensity += 0.3f;
         }
     }
 }
