@@ -13,8 +13,12 @@ public class Sand : MonoBehaviour
     bool doSmaller = true;
     bool resize = true;
 
+    Rigidbody2D rb;
+
     private void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
+
         sandglass.OnChangeRound += ChangeDoSmaller;
     }
     private void Update()
@@ -49,9 +53,15 @@ public class Sand : MonoBehaviour
         float time = Time.deltaTime * sizingSpeed;
 
         if (doSmaller)
+        {
             transform.localScale -= new Vector3(1f * sizingSpeed * Time.deltaTime, 1f * sizingSpeed * Time.deltaTime, 1f * sizingSpeed * Time.deltaTime);
+            rb.gravityScale = 0.05f;
+        }
         else
+        {
             transform.localScale += new Vector3(1f * sizingSpeed * Time.deltaTime, 1f * sizingSpeed * Time.deltaTime, 1f * sizingSpeed * Time.deltaTime);
+            rb.gravityScale = 0.005f;
+        }
 
         transform.localScale = new Vector3(Mathf.Clamp(transform.localScale.x, sandglass.minSize, sandglass.maxSize), Mathf.Clamp(transform.localScale.y, sandglass.minSize, sandglass.maxSize), Mathf.Clamp(transform.localScale.z, sandglass.minSize, sandglass.maxSize));
     }
