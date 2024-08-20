@@ -18,6 +18,9 @@ namespace Choi
         Light2D map_Light;
         Coroutine lookFicture;
         bool flag = false;
+
+        [SerializeField] GameObject mouseWheel;
+
         void Start()
         {
             spriteRenderer = monster.GetComponent<SpriteRenderer>();
@@ -68,6 +71,7 @@ namespace Choi
 
         IEnumerator LookFicture()
         {
+
             Color color = GetComponent<SpriteRenderer>().color;
             color.a = 1.0f;
             GetComponent<SpriteRenderer>().color = color;
@@ -76,10 +80,14 @@ namespace Choi
             map_Light.intensity += 0.1f;
             GameObject.Find("Player").GetComponent<PlayerController_st1>().simulated = true;
             yield return new WaitForSeconds(5.0f);
+
+            mouseWheel.SetActive(false);
+
             GameObject.Find("ToyManager").GetComponent<Toy_Manager>().OnActive();
             GameObject.Find("Player").GetComponent<PlayerController_st1>().simulated = false;
             Destroy(wall);
             anim.SetBool("lookForFicture", false);
+
         }
     }
 }
