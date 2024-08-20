@@ -61,7 +61,7 @@ namespace Marogt
                     }
                     adjustLightCoroutine = StartCoroutine(AdjustLight(targetLightSize));
                 }
-                else if (isDetectable)
+                else if (isDetectable && isPositive)
                 {
                     // Update target light size when detectable but no change in detectability
 

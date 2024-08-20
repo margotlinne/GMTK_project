@@ -9,6 +9,8 @@ namespace Margot
 
         [SerializeField] private float shockWaveTime = 0.75f;
 
+        public StageTwoManager manager;
+
         Coroutine shockWaveCoroutine;
         Material _material;
         Camera mainCamera;
@@ -26,6 +28,14 @@ namespace Margot
 
         public void CallShockWave()
         {
+            if (manager.withNegativeLight)
+            {
+                SfxManager.instance.ShockwaveNegSoundPlay();
+            }
+            else
+            {
+                SfxManager.instance.ShockwavePosSoundPlay();
+            }
             shockWaveCoroutine = StartCoroutine(ShockWaveAction(-0.1f, 1f));
         }
 

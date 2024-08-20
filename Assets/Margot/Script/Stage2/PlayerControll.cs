@@ -48,6 +48,8 @@ namespace Margot
 
                 if (moveInput != 0)
                 {
+                    // [sound] footstep
+
                     isWalking = true;
                     anim.SetBool("Walking", true);
                 }

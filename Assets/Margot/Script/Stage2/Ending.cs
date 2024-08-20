@@ -60,6 +60,8 @@ namespace Margot
             // 시각화된 긍정적 상호작용 비활성화
             manager.hideInteractions = true;
 
+            SfxManager.instance.Stage2AfterClear();
+
         }
 
 
