@@ -1216,16 +1216,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 834798981}
   serializedVersion: 2
-
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-
   m_Father: {fileID: 382618917}
-
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1133164778
 GameObject:
@@ -2216,40 +2212,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1748581101}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-
---- !u!1 &1865017198
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1865017199}
-  - component: {fileID: 1865017200}
-  m_Layer: 0
-  m_Name: Face_SoSo
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1865017199
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1865017198}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1748581101}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-
 --- !u!212 &1865017200
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2503,17 +2465,8 @@ SceneRoots:
   - {fileID: 71539272}
   - {fileID: 451867159}
   - {fileID: 564227803}
-
-  - {fileID: 1807114540}
-  - {fileID: 703718961}
-  - {fileID: 2147435680}
-  - {fileID: 151858980}
-  - {fileID: 834798983}
-
   - {fileID: 89106681}
   - {fileID: 1341594328}
   - {fileID: 53072807}
   - {fileID: 1748581101}
-
   - {fileID: 797204527}
-
