@@ -2483,6 +2483,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shockWaveTime: 0.75
+  manager: {fileID: 1502060257}
   player: {fileID: 812225963}
   shockWaveObj: {fileID: 1081054680}
 --- !u!212 &1081054682

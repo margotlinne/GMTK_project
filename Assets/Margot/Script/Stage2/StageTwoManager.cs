@@ -191,7 +191,7 @@ namespace Margot
 
         public void ShowInteractBox(int num, string keyCode)
         {
-            
+            SfxManager.instance.InteractionAppearSoundPlay();
            // Debug.Log("_------------------" + keyCode);
             showBox = true;
 
@@ -203,6 +203,7 @@ namespace Margot
 
         public void HideInteractBox()
         {
+            SfxManager.instance.InteractionDisappearSoundPlay();
             ///Debug.Log("HideInteractBox called"); 
             boxObj.GetComponent<InteractionBox>().Disappearing();
             InteractUICanavs.SetActive(true);
