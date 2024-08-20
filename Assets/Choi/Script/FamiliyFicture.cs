@@ -73,11 +73,13 @@ namespace Choi
             GetComponent<SpriteRenderer>().color = color;
             Animator anim = GameObject.Find("Player").GetComponent<Animator>();
             anim.SetBool("lookForFicture", true);
-            map_Light.intensity += Mathf.Lerp(0.0f, 0.1f, Time.deltaTime);
+            map_Light.intensity += 0.1f;
+            GameObject.Find("Player").GetComponent<PlayerController_st1>().simulated = true;
             yield return new WaitForSeconds(5.0f);
+            GameObject.Find("ToyManager").GetComponent<Toy_Manager>().OnActive();
+            GameObject.Find("Player").GetComponent<PlayerController_st1>().simulated = false;
             Destroy(wall);
             anim.SetBool("lookForFicture", false);
-
         }
     }
 }

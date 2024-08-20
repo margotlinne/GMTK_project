@@ -78,7 +78,7 @@ namespace stageTwo
             {
                 return keyCode;
             }
-            return KeyCode.None; // À¯È¿ÇÏÁö ¾ÊÀº Å° ÄÚµå
+            return KeyCode.None; // ï¿½ï¿½È¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å° ï¿½Úµï¿½
 
         }
     }
