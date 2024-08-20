@@ -18,33 +18,19 @@ public class SfxManager : MonoBehaviour
      * 
      * 
      */
-    [HideInInspector]
     public AudioClip footStepSoundClip;
-    [HideInInspector]
     public AudioClip ClassRoomAmbSoundClip;
-    [HideInInspector]
     public AudioClip ClassAmbNegativeSoundClip;
-    [HideInInspector]
     public AudioClip BreatheSoundClip;
-    [HideInInspector]
     public AudioClip ChildrenPlayingSoundClip;
-    [HideInInspector]
     public AudioClip InteractionAppearSoundClip;
-    [HideInInspector]
     public AudioClip InteractionDisappearSoundClip;
-    [HideInInspector]
     public AudioClip PhoneGrabSoundClip;
-    [HideInInspector]
     public AudioClip ShockwavePosSoundClip;
-    [HideInInspector]
     public AudioClip ShockwaveNegSoundClip;
-    [HideInInspector]
     public AudioClip VolUpSoundClip;
-    [HideInInspector]
     public AudioClip VolDownSoundClip;
-    [HideInInspector]
     public AudioClip BareFootSoundClip;
-    [HideInInspector]
     public AudioClip NightAmbSoundClip;
 
     void Awake()
@@ -90,6 +76,13 @@ public class SfxManager : MonoBehaviour
     }
 
     
+    public void Stage2AfterClear()
+    {
+        audioSource.clip = ClassRoomAmbSoundClip; 
+    }
+
+
+
 
     /*
      * keep the form of ~SoundPlay 
@@ -102,47 +95,42 @@ public class SfxManager : MonoBehaviour
      */
     public void NightAmbSoundPlay()
     {
-        audioSource.PlayOneShot(audioSource.clip);
+        audioSource.PlayOneShot(NightAmbSoundClip);
     }
 
     public void BareFootSoundPlay()
     {
-        audioSource.PlayOneShot(audioSource.clip);
+        audioSource.PlayOneShot(BareFootSoundClip);
     }
 
     public void VolDownSoundPlay()
     {
-        audioSource.PlayOneShot(audioSource.clip);
+        audioSource.PlayOneShot(VolUpSoundClip);
     }
 
     public void VolUpSoundPlay()
     {
-        audioSource.PlayOneShot(audioSource.clip);
+        audioSource.PlayOneShot(VolUpSoundClip);
     }
 
     public void ShockwaveNegSoundPlay()
     {
-        audioSource.PlayOneShot(audioSource.clip);
+        audioSource.PlayOneShot(ShockwaveNegSoundClip);
     }
 
     public void ShockwavePosSoundPlay()
     {
-        audioSource.PlayOneShot(audioSource.clip);
+        audioSource.PlayOneShot(ShockwavePosSoundClip);
     }
 
     public void PhoneGrabSoundPlay()
     {
-        audioSource.PlayOneShot(audioSource.clip);
+        audioSource.PlayOneShot(PhoneGrabSoundClip);
     }
 
     public void footStepSoundPlay()
     {
         audioSource.PlayOneShot(footStepSoundClip);
-    }
-
-    public void ClassRoomAmbSoundPlay()
-    {
-        audioSource.PlayOneShot(ClassRoomAmbSoundClip);
     }
 
     public void ClassAmbNegativeSoundPlay()

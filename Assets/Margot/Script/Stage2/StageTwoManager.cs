@@ -55,7 +55,8 @@ namespace Margot
         // -------------------------------------------------------------------->>>>>>
 
 
-
+        bool boxAppears = false;
+        bool boxDisappears = false;
         
         void Awake()
         {
@@ -191,8 +192,13 @@ namespace Margot
 
         public void ShowInteractBox(int num, string keyCode)
         {
-            
-           // Debug.Log("_------------------" + keyCode);
+            if (!boxAppears)
+            {
+                SfxManager.instance.InteractionAppearSoundPlay();
+                boxAppears = true;
+                boxDisappears = false;
+            }
+            // Debug.Log("_------------------" + keyCode);
             showBox = true;
 
             boxObj.transform.position = positiveBoxPos[num].position;
@@ -203,6 +209,12 @@ namespace Margot
 
         public void HideInteractBox()
         {
+            if (!boxDisappears)
+            {
+                SfxManager.instance.InteractionDisappearSoundPlay();
+                boxDisappears = true;
+                boxAppears = false;
+            }
             ///Debug.Log("HideInteractBox called"); 
             boxObj.GetComponent<InteractionBox>().Disappearing();
             InteractUICanavs.SetActive(true);
