@@ -16,72 +16,75 @@ namespace Margot
 
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
+            if (!manager.stageClear)
             {
-                if (ActiveVolumeBars() > 0) 
+                if (Input.GetKeyDown(KeyCode.Alpha1))
                 {
-                    volumeBars[ActiveVolumeBars() - 1].SetActive(false);
-                    Debug.Log("lower volume");
-                    //manager.distanceToDetect -= 1f;
-                    manager.volumeLevel -= 1;
-                    manager.shockWave.CallShockWave();
-
-                    phoneAnim.VolumeDownAnimation();
-
-                    if (manager.withNegativeLight)
+                    if (ActiveVolumeBars() > 0)
                     {
-                        Debug.Log("---volume down next to negative sound");
-                        manager.AdjustWarningBGColour(warningBGAdjustSize, false);
+                        volumeBars[ActiveVolumeBars() - 1].SetActive(false);
+                        Debug.Log("lower volume");
+                        //manager.distanceToDetect -= 1f;
+                        manager.volumeLevel -= 1;
+                        manager.shockWave.CallShockWave();
+
+                        phoneAnim.VolumeDownAnimation();
+
+                        if (manager.withNegativeLight)
+                        {
+                            Debug.Log("---volume down next to negative sound");
+                            manager.AdjustWarningBGColour(warningBGAdjustSize, false);
+                        }
                     }
                 }
-            }
-            else  if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                if (ActiveVolumeBars() < volumeBars.Length)
+                else if (Input.GetKeyDown(KeyCode.Alpha2))
                 {
-                    volumeBars[ActiveVolumeBars()].SetActive(true);
-                    Debug.Log("increase volume");
-                    //manager.distanceToDetect += 1f;
-
-                    manager.volumeLevel += 1;
-                    manager.shockWave.CallShockWave();
-
-                    phoneAnim.VolumeUpAnimation();
-
-
-                    if (manager.withNegativeLight)
+                    if (ActiveVolumeBars() < volumeBars.Length)
                     {
-                        Debug.Log("---volume up next to negative sound");
-                        manager.AdjustWarningBGColour(warningBGAdjustSize, true);
+                        volumeBars[ActiveVolumeBars()].SetActive(true);
+                        Debug.Log("increase volume");
+                        //manager.distanceToDetect += 1f;
+
+                        manager.volumeLevel += 1;
+                        manager.shockWave.CallShockWave();
+
+                        phoneAnim.VolumeUpAnimation();
+
+
+                        if (manager.withNegativeLight)
+                        {
+                            Debug.Log("---volume up next to negative sound");
+                            manager.AdjustWarningBGColour(warningBGAdjustSize, true);
+                        }
                     }
+                }
+
+
+                if (manager.volumeToZero)
+                {
+                    for (int i = 0; i < volumeBars.Length; i++)
+                    {
+                        volumeBars[i].SetActive(false);
+                    }
+                    manager.volumeToZero = false;
                 }
             }
 
-
-            if (manager.volumeToZero)
+            int ActiveVolumeBars()
             {
+                int activeNum = 0;
+
                 for (int i = 0; i < volumeBars.Length; i++)
                 {
-                    volumeBars[i].SetActive(false);
+                    if (volumeBars[i].activeSelf)
+                    {
+                        activeNum++;
+                    }
                 }
-                manager.volumeToZero = false;
+
+                return activeNum;
             }
-        }
-
-        int ActiveVolumeBars()
-        {
-            int activeNum = 0;
-
-            for (int i = 0; i < volumeBars.Length; i++)
-            {
-                if (volumeBars[i].activeSelf)
-                {
-                    activeNum++;
-                }
-            }
-
-            return activeNum;
         }
     }
-}
 
+}

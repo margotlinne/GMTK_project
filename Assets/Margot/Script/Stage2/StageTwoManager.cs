@@ -18,6 +18,7 @@ namespace Margot
         public bool freeze = false;
         public bool withNegativeLight = false;
         public bool interactingWNegativeLight = false;
+        public bool hideInteractions = false;
 
         public Transform[] positiveBoxPos;
         public Transform[] negativeBoxPos;
@@ -46,7 +47,14 @@ namespace Margot
         public float brightnessUpStrength = 5f;
 
         public Image warningBG;
+        // -------------------------------------------------------------------->>>>>>
+        public int finishedNegativeNum = 0;
+        public int finishedPositiveNum = 0;
+        public bool stageClear = false;
+        public GameObject UIPhoneImg;
+        // -------------------------------------------------------------------->>>>>>
 
+        
         void Awake()
         {
             shockWave = shockWaveObj.GetComponent<ShockWave>();
@@ -58,7 +66,6 @@ namespace Margot
             boxObj.SetActive(false);
             InteractUICanavs.SetActive(false);
 
-            // i=0�� ���� ���� �� ó�� �ڵ������� ��ȣ�ۿ����� ����
             for (int i = 1; i < positiveBoxPos.Length; i++)
             {
                 positiveBoxPos[i].GetComponentInChildren<InteractLight>().order = i;
@@ -118,6 +125,23 @@ namespace Margot
             {
                 interactingWNegativeLight = false;
             }
+
+            // -------------------------------------------------------------------->>>>>>
+            if (finishedNegativeNum == negativeBoxPos.Length && finishedPositiveNum == positiveBoxPos.Length-1)
+            {
+                stageClear = true;
+                UIPhoneImg.SetActive(false);
+            }
+            // -------------------------------------------------------------------->>>>>>
+
+
+            if (hideInteractions)
+            {
+                for (int i = 0; i < positiveBoxPos.Length; i++)
+                {
+                    positiveBoxPos[i].gameObject.SetActive(false);
+                }
+            }
         }
 
         public void AdjustWarningBGColour(float val, bool isIncreasing)
@@ -148,7 +172,7 @@ namespace Margot
 
         public void ShockWaveForInteraction(int order)
         {
-            //Debug.Log("call shock wave for interaction");
+           // Debug.Log("call shock wave for interaction" + order);
             shockWaveObj.transform.position = positiveBoxPos[order].position;
             shockWave.CallShockWave();
         }

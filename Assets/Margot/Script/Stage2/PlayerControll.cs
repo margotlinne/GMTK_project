@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using static System.Runtime.CompilerServices.RuntimeHelpers;
 
-namespace stageTwo
+namespace Margot
 {
     public class PlayerControll : MonoBehaviour
     {

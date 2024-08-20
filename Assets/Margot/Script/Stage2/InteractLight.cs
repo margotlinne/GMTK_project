@@ -32,6 +32,8 @@ namespace Marogt
         private float targetLightSize = 0f;
         private float lightChangeDuration = 1f; // Duration for changing light size
 
+        bool changedValueForManager = false;
+        bool hidKeyBox = false;
 
         void Awake()
         {
@@ -78,28 +80,37 @@ namespace Marogt
                 {
                     if (distance <= 3 && manager.volumeLevel == 5)
                     {
-                         Debug.Log(order + " time to show box");
+                        hidKeyBox = false;
+                        // Debug.Log(order + " time to show box");
                         manager.ShowInteractBox(order, "E");
                     }
                     else
                     {
-                        Debug.Log("hide");
+                        // Debug.Log("hide");
                         manager.HideInteractBox();
                     }
                 }
-                else if (!isDetectable && manager.pickedUpPhone && isPositive)
+                else if (!isDetectable && manager.pickedUpPhone && isPositive && !hidKeyBox)
                 {
                     //Debug.Log("hide");
                     manager.HideInteractBox();
+                    hidKeyBox = true;
                 }
 
                 if (isDetectable && !isPositive && !isFinished)
                 {
+                   // Debug.Log("tell manager that player is with negative light");
                     manager.withNegativeLight = true;
+                    changedValueForManager = false;
                 }
                 else if ((!isDetectable && !isPositive) || (isPositive && isDetectable))
                 {
-                    manager.withNegativeLight = false;
+                    if (!changedValueForManager)
+                    {
+                      //  Debug.Log("tell manager that player is NOOOOOOOOOOOT with negative light");
+                        manager.withNegativeLight = false;
+                        changedValueForManager = true;
+                    }
                 }
 
 
@@ -107,7 +118,7 @@ namespace Marogt
             
             // positive light --------------------
 
-            if (isPositive && manager.interacted && !isFinished)
+            if (isPositive && manager.interacted && !isFinished && manager.pickedUpPhone && isDetectable)
             {
                 adjustLightCoroutine = StartCoroutine(AdjustLight(0f));
                 manager.ShockWaveForInteraction(order);
@@ -119,6 +130,8 @@ namespace Marogt
                 manager.IncreaseBGLight();
                 manager.volumeToZero = true;
                 manager.freeze = true;
+                manager.HideInteractBox();
+                manager.finishedPositiveNum++;
             }
 
             if (isFinished && manager.freeze && isPositive)
@@ -129,7 +142,7 @@ namespace Marogt
 
             // negative light ---------------------
             // 플레이어가 부정적 빛과 상호작용하고 있으며 해당 빛이 감지 가능한 거리에 있을 때 즉 해당 빛과 상호작용 중일 때
-            if (!isPositive && manager.interactingWNegativeLight && isDetectable)
+            if (!isPositive && manager.interactingWNegativeLight && isDetectable && !deleteLight)
             {
                 deleteLight = true;
             }
@@ -137,10 +150,11 @@ namespace Marogt
             if (deleteLight)
             {
                 // 상호작용 후에 붉은 배경이 원래대로 돌아왔다면 부정적 상호작용이 끝난 상태
-                if (manager.warningBG.color.a == 0)
+                if (manager.warningBG.color.a == 0 && !isFinished)
                 {
                     isFinished = true;
                     manager.withNegativeLight = false;
+                    manager.finishedNegativeNum++;
                 }
             }
 

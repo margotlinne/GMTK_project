@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 96932ab5212a5db44aaaaefc1605ecc0
+guid: f44b04f3c3fa8e34eab257bfda6ea99a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: img3_0
+      name: Talk_Bubble_UI_0004_Talk_Bubble_Down_UI_0
       rect:
         serializedVersion: 2
-        x: 3669
-        y: 337
-        width: 580
-        height: 512
+        x: 925
+        y: 689
+        width: 166
+        height: 149
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c303e97d04354d04d8c1c5ad12cc09a0
-      internalID: 1291973820
+      spriteID: b22233b223699484f9442e6428462fb6
+      internalID: 10921260
       vertices: []
       indices: 
       edges: []
@@ -141,7 +141,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      img3_0: 1291973820
+      Talk_Bubble_UI_0004_Talk_Bubble_Down_UI_0: 10921260
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
