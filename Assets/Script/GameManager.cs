@@ -20,6 +20,16 @@ public class GameManager : MonoBehaviour
 
         instance = this;
         DontDestroyOnLoad(gameObject);
+
+        InitStage();
+    }
+
+    void InitStage()
+    {
+        PlayerPrefs.SetInt(Stage.Child.ToString(), 0);
+        PlayerPrefs.SetInt(Stage.Student.ToString(), 0);
+        PlayerPrefs.SetInt(Stage.Adult.ToString(), 0);
+        PlayerPrefs.SetInt(Stage.Grandpa.ToString(), 0);
     }
 
     public void ChangeScene(string sceneName)
