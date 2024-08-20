@@ -12,7 +12,6 @@ namespace User257
     {
         [SerializeField] Knob knob;
         [SerializeField] SpriteRenderer knobLight;
-        [SerializeField] GameObject clearText;
         [SerializeField] GameObject face_good;
         [SerializeField] GameObject face_normal;
 
@@ -45,8 +44,6 @@ namespace User257
             }
 
             knobLight.color = Color.red;
-
-            clearText.SetActive(false);
 
             face_normal.SetActive(true);
             face_good.SetActive(false);
@@ -115,6 +112,8 @@ namespace User257
                 curRound++;
                 OnChangeRound?.Invoke(curRound);
 
+                knobLight.color = Color.red;
+
                 face_normal.SetActive(true);
                 face_good.SetActive(false);
             }
@@ -126,7 +125,7 @@ namespace User257
                 face_normal.SetActive(false);
                 face_good.SetActive(true);
 
-                clearText.SetActive(true);
+                Debug.Log("Clear");
             }
         }
 
