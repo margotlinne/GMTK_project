@@ -75,3 +75,4 @@ crashlytics-build.properties
 /Assets/UniversalRenderPipelineGlobalSettings.asset
 /Assets/UniversalRenderPipelineGlobalSettings.asset.meta
 /ProjectSettings/ShaderGraphSettings.asset
+*.zip
