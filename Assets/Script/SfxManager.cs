@@ -30,6 +30,16 @@ public class SfxManager : MonoBehaviour
 
     public AudioClip InteractionDisappearSoundClip;
 
+    public AudioClip PhoneGrabSoundClip;
+
+    public AudioClip ShockwavePosSoundClip;
+
+    public AudioClip ShockwaveNegSoundClip;
+
+    public AudioClip VolUpSoundClip;
+
+    public AudioClip VolDownSoundClip;
+
     void Awake()
     {
         audioSource = FindObjectOfType<AudioSource>();
@@ -44,20 +54,29 @@ public class SfxManager : MonoBehaviour
          
          */
 
-        footStepSoundClip = Resources.Load<AudioClip>("Sfx_Ftstp_01");
+        footStepSoundClip = Resources.Load<AudioClip>("Stage 2/Sfx_Ftstp_01");
 
-        ClassRoomAmbSoundClip = Resources.Load<AudioClip>("Amb_Classroom");
+        ClassRoomAmbSoundClip = Resources.Load<AudioClip>("Stage 2/Amb_Classroom");
 
-        ClassAmbNegativeSoundClip = Resources.Load<AudioClip>("Amb_Classroom_Negative");
+        ClassAmbNegativeSoundClip = Resources.Load<AudioClip>("Stage 2/Amb_Classroom_Negative");
 
         BreatheSoundClip = Resources.Load<AudioClip>("Dx_Breathing");
 
-        ChildrenPlayingSoundClip = Resources.Load<AudioClip>("Amb_ChildernPlaying");
+        ChildrenPlayingSoundClip = Resources.Load<AudioClip>("Stage 2/Amb_ChildernPlaying");
 
-        InteractionAppearSoundClip = Resources.Load<AudioClip>("Sfx_Interaction_Appear");
+        InteractionAppearSoundClip = Resources.Load<AudioClip>("Stage 2/Sfx_Interaction_Appear");
 
-        InteractionDisappearSoundClip = Resources.Load<AudioClip>("Sfx_Interaction_Disappear");
+        InteractionDisappearSoundClip = Resources.Load<AudioClip>("Stage 2/Sfx_Interaction_Disappear");
 
+        PhoneGrabSoundClip = Resources.Load<AudioClip>("Stage 2/Sfx_PhoneGrab");
+
+        ShockwavePosSoundClip = Resources.Load<AudioClip>("Stage 2/Sfx_ShockwavePositive");
+
+        ShockwaveNegSoundClip = Resources.Load<AudioClip>("Stage 2/Sfx_Shockwave_Negative");
+
+        VolUpSoundClip = Resources.Load<AudioClip>("Stage 2/Sfx_Vol_Up");
+
+        VolDownSoundClip = Resources.Load<AudioClip>("Stage 2/Sfx_Vol_Down");
     }
 
     /*
@@ -69,6 +88,31 @@ public class SfxManager : MonoBehaviour
      * }
      * 
      */
+
+    public void VolDown()
+    {
+        audioSource.PlayOneShot(audioSource.clip);
+    }
+
+    public void VolUp()
+    {
+        audioSource.PlayOneShot(audioSource.clip);
+    }
+
+    public void ShockwaveNeg()
+    {
+        audioSource.PlayOneShot(audioSource.clip);
+    }
+
+    public void ShockwavePos()
+    {
+        audioSource.PlayOneShot(audioSource.clip);
+    }
+
+    public void PhoneGrab()
+    {
+        audioSource.PlayOneShot(audioSource.clip);
+    }
 
     public void footStepSoundPlay()
     {
