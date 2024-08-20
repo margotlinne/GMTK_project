@@ -22,7 +22,7 @@ public class Sticker : MonoBehaviour, IPointerClickHandler, IDragHandler, IDropH
 
     public void OnDrop(PointerEventData eventData)
     {
-        if (eventData.pointerEnter.gameObject == gameObject)
+        if (eventData.pointerEnter.gameObject. == gameObject)
         {
             eventData.pointerEnter.gameObject.transform.position = transform.position;
         }

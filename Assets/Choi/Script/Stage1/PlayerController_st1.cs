@@ -34,7 +34,7 @@ namespace Choi
         {
             float moveInput = Input.GetAxisRaw("Horizontal");
             
-            anim.SetFloat("Vectical", moveInput);
+            anim.SetFloat("Horizontal", moveInput);
 
             if (moveInput != 0) anim.SetBool("IsWalking", true);
             else anim.SetBool("IsWalking", false);
