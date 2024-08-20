@@ -144,7 +144,7 @@ namespace User257
                 light_sandglass.SetActive(true);
 
                 GameManager.Instance.SetStageClear(GameManager.Stage.Adult);
-                SceneManager.LoadScene("StageSelection_User257");
+                SceneManager.LoadScene("Credit");
             }
         }
 

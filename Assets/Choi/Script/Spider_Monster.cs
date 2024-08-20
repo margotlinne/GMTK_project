@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 public class Spider_Monster : MonoBehaviour
 {
@@ -24,6 +25,8 @@ public class Spider_Monster : MonoBehaviour
         else
         {
             spider_toy.SetActive(true);
+            GameManager.Instance.SetStageClear(GameManager.Stage.Child);
+            SceneManager.LoadScene("Stage_2");
             Destroy(this.gameObject);
             GameObject.Find("Maps").GetComponent<Light2D>().intensity += 0.3f;
         }
