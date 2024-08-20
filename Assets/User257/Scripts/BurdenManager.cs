@@ -15,6 +15,8 @@ namespace User257
         [SerializeField] GameObject face_soso;
         [SerializeField] GameObject face_normal;
 
+        [SerializeField] GameObject greenLightSound;
+
         int burdenAmount;
 
         private void Awake()
@@ -41,13 +43,19 @@ namespace User257
             {
                 case 3:
                     face_bad.SetActive(true);
+                    soundRoutine = StartCoroutine(GreenLightSoundTime());
                     break;
                 case 2:
-                case 1:
                     face_soso.SetActive(true);
+                    soundRoutine = StartCoroutine(GreenLightSoundTime());
+                    break;
+                case 1:
+                    face_normal.SetActive(true);
+                    soundRoutine = StartCoroutine(GreenLightSoundTime());
                     break;
                 case 0:
                     face_normal.SetActive(true);
+                    soundRoutine = StartCoroutine(GreenLightSoundTime());
                     break;
             }
 
@@ -65,6 +73,14 @@ namespace User257
             face_bad.SetActive(false);
             face_soso.SetActive(false);
             face_normal.SetActive(false);
+        }
+
+        Coroutine soundRoutine;
+        IEnumerator GreenLightSoundTime()
+        {
+            greenLightSound.SetActive(true);
+            yield return new WaitForSeconds(0.5f);
+            greenLightSound.SetActive(false);
         }
     }
 }

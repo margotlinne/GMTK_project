@@ -38,6 +38,10 @@ namespace User257
 
         [SerializeField] GameObject light_sandglass;
 
+        [SerializeField] AudioSource amb_negative;
+        [SerializeField] AudioSource dialTurn;
+        [SerializeField] AudioSource greenLight;
+
         private void Awake()
         {
             for (int i = 0; i < sandParent.childCount; i++)
@@ -56,11 +60,15 @@ namespace User257
         private void Start()
         {
             knob.OnMouseUp += CheckClear;
+            knob.OnMouseDown += DialTurnSound;
+
+            amb_negative.gameObject.SetActive(true);
         }
 
         private void OnDisable()
         {
             knob.OnMouseUp -= CheckClear;
+            knob.OnMouseDown -= DialTurnSound;
         }
 
         private void Update()
@@ -113,6 +121,8 @@ namespace User257
         {
             if (knob.transform.rotation.z >= timing[curRound] && knob.transform.rotation.z <= timing[curRound] + 0.1f)
             {
+                soundRoutine = StartCoroutine(GreenLightSoundTime());
+
                 curRound++;
                 OnChangeRound?.Invoke(curRound);
 
@@ -120,6 +130,8 @@ namespace User257
 
                 face_normal.SetActive(true);
                 face_good.SetActive(false);
+
+                SetSoundSpeed();
             }
             else
                 Restart();
@@ -129,10 +141,29 @@ namespace User257
                 face_normal.SetActive(false);
                 face_good.SetActive(true);
 
-
                 light_sandglass.SetActive(true);
 
-                Debug.Log("Clear");
+                GameManager.Instance.SetStageClear(GameManager.Stage.Adult);
+                SceneManager.LoadScene("StageSelection_User257");
+            }
+        }
+
+        void SetSoundSpeed()
+        {
+            switch (curRound)
+            {
+                case 0:
+                    amb_negative.pitch = 3f;
+                    break;
+                case 1:
+                    amb_negative.pitch = 0.5f;
+                    break;
+                case 2:
+                    amb_negative.pitch = 3f;
+                    break;
+                case 3:
+                    amb_negative.pitch = 1f;
+                    break;
             }
         }
 
@@ -145,6 +176,26 @@ namespace User257
         {
             if (sands[0].transform.localScale.x <= minSize || sands[0].transform.localScale.x >= maxSize)
                 Restart();
+        }
+
+        Coroutine soundRoutine;
+        IEnumerator GreenLightSoundTime()
+        {
+            greenLight.gameObject.SetActive(true);
+            yield return new WaitForSeconds(0.5f);
+            greenLight.gameObject.SetActive(false);
+        }
+
+        void DialTurnSound()
+        {
+            soundRoutine = StartCoroutine(DialTurnSoundTime());
+        }
+
+        IEnumerator DialTurnSoundTime()
+        {
+            dialTurn.gameObject.SetActive(true);
+            yield return new WaitForSeconds(0.5f);
+            dialTurn.gameObject.SetActive(false);
         }
     }
 

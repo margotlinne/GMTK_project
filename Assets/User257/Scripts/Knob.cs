@@ -16,6 +16,7 @@ namespace User257
         MouseProtractor mouseProtractor;
 
         public UnityAction OnMouseUp;
+        public UnityAction OnMouseDown;
 
         private void Awake()
         {
@@ -40,6 +41,9 @@ namespace User257
                 usingKnob = false;
                 OnMouseUp?.Invoke();
             }
+
+            if (Input.GetMouseButtonDown(0))
+                OnMouseDown?.Invoke();
 
             if (usingKnob)
                 RotateKnob();
