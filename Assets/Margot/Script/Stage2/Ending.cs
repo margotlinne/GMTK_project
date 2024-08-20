@@ -19,8 +19,8 @@ namespace Margot
 
         public GameObject friendsSilhouette;
         public GameObject playerLight;
-        
-        
+
+        public GameObject kidsSoundObj;
 
         void Awake()
         {
@@ -67,8 +67,12 @@ namespace Margot
 
         public void SoundPlay()
         {
+            kidsSoundObj.SetActive(true);
+        }
 
-            SfxManager.instance.Stage2AfterClear();
+        public void ShockWaveSoundPlay()
+        {
+            SfxManager.instance.ShockwavePosSoundPlay();
         }
 
 
@@ -76,7 +80,7 @@ namespace Margot
         {
             // ¥Ÿ¿Ω æ¿¿∏∑Œ
             GameManager.Instance.SetStageClear(GameManager.Stage.Student);
-            SceneManager.LoadScene("StageSelection_User257");
+            SceneManager.LoadScene("Stage_3_1");
         }
     }
 
