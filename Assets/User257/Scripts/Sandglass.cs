@@ -129,10 +129,10 @@ namespace User257
                 face_normal.SetActive(false);
                 face_good.SetActive(true);
 
-
                 light_sandglass.SetActive(true);
 
-                Debug.Log("Clear");
+                GameManager.Instance.SetStageClear(GameManager.Stage.Adult);
+                SceneManager.LoadScene("StageSelection_User257");
             }
         }
 
