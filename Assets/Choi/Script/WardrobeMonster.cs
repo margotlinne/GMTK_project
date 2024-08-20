@@ -19,7 +19,6 @@ namespace Choi
 
         private void OnTriggerStay2D(Collider2D collision)
         {
-            Debug.Log("Trigger");
             // 상호작용 UI 표시
             if (Input.GetKeyDown(KeyCode.E))
             {

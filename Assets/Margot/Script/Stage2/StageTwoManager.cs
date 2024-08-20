@@ -45,7 +45,7 @@ namespace Margot
             boxObj.SetActive(false);
             InteractUICanavs.SetActive(false);
 
-            // i=0Àº °ÔÀÓ ½ÃÀÛ ½Ã Ã³À½ ÇÚµåÆù°úÀÇ »óÈ£ÀÛ¿ëÀ¸·Î Á¦¿Ü
+            // i=0ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ Ã³ï¿½ï¿½ ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½Û¿ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             for (int i = 1; i < positiveBoxPos.Length; i++)
             {
                 positiveBoxPos[i].GetComponentInChildren<InteractLight>().order = i;
