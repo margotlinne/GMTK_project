@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 namespace User257
 {
@@ -9,8 +12,11 @@ namespace User257
     {
         [SerializeField] Knob knob;
         [SerializeField] SpriteRenderer knobLight;
-        [SerializeField] TMP_Text temp;
-        [SerializeField] GameObject clearText;
+        [SerializeField] GameObject face_good;
+        [SerializeField] GameObject face_normal;
+
+        public float minSize = 0.1f;
+        public float maxSize = 2f;
 
         public Transform sandParent;
 
@@ -20,6 +26,16 @@ namespace User257
 
         [SerializeField] float scaleAmount = 1f;
 
+        int curRound = 0;
+        int wholeRound = 3;
+
+        /// <summary>
+        /// 다이얼 로테이션 타이밍
+        /// </summary>
+        [SerializeField] float[] timing;
+
+        public UnityAction<int> OnChangeRound;
+
         private void Awake()
         {
             for (int i = 0; i < sandParent.childCount; i++)
@@ -28,9 +44,9 @@ namespace User257
             }
 
             knobLight.color = Color.red;
-            temp.text = "unhappy";
 
-            clearText.SetActive(false);
+            face_normal.SetActive(true);
+            face_good.SetActive(false);
         }
 
         private void Start()
@@ -50,11 +66,26 @@ namespace User257
                 ChangeSandScale();
                 ChangeEmotion();
             }
+
+            CheckFail();
         }
 
         void ChangeSandScale()
         {
-            curScale = -knob.gameObject.transform.rotation.z * scaleAmount + 1f;
+            curScale += -knob.gameObject.transform.rotation.z * scaleAmount;
+            
+            switch (curRound)
+            {
+                case 0:
+                    curScale = Mathf.Clamp(curScale, minSize, 1);
+                    break;
+                case 1:
+                    curScale = Mathf.Clamp(curScale, 1, maxSize);
+                    break;
+                case 2:
+                    curScale = Mathf.Clamp(curScale, minSize, maxSize);
+                    break;
+            }
 
             foreach (Transform element in sands)
                 element.localScale = new Vector3(curScale, curScale, curScale);
@@ -62,24 +93,51 @@ namespace User257
 
         void ChangeEmotion()
         {
-            if (knob.transform.rotation.z >= 0.3f && knob.transform.rotation.z <= 0.4f)
+            if (knob.transform.rotation.z >= timing[curRound] && knob.transform.rotation.z <= timing[curRound] + 0.1f) //0.1f 정도의 허용범위
             {
                 knobLight.color = Color.green;
-                temp.text = "happy";
+                face_normal.SetActive(false);
+                face_good.SetActive(true);
             }
             else
             {
                 knobLight.color = Color.red;
-                temp.text = "unhappy";
             }
         }
 
         void CheckClear()
         {
-            if(knob.transform.rotation.z >= 0.3f && knob.transform.rotation.z <= 0.4f)
+            if (knob.transform.rotation.z >= timing[curRound] && knob.transform.rotation.z <= timing[curRound] + 0.1f)
             {
-                clearText.SetActive(true);
+                curRound++;
+                OnChangeRound?.Invoke(curRound);
+
+                knobLight.color = Color.red;
+
+                face_normal.SetActive(true);
+                face_good.SetActive(false);
             }
+            else
+                Restart();
+
+            if (curRound == wholeRound)
+            {
+                face_normal.SetActive(false);
+                face_good.SetActive(true);
+
+                Debug.Log("Clear");
+            }
+        }
+
+        void Restart()
+        {
+            SceneManager.LoadScene("Stage_3_4"); //실패하면 씬 재시작
+        }
+
+        void CheckFail()
+        {
+            if (sands[0].transform.localScale.x <= minSize || sands[0].transform.localScale.x >= maxSize)
+                Restart();
         }
     }
 
