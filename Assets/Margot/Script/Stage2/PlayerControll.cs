@@ -21,6 +21,7 @@ namespace Margot
         bool gameStarted = false;
 
         public StageTwoManager manager;
+        public GameObject footStepSoundObj;
 
         void Awake()
         {
@@ -52,11 +53,13 @@ namespace Margot
 
                     isWalking = true;
                     anim.SetBool("Walking", true);
+                    StartFootStepSound();
                 }
                 else
                 {
                     isWalking = false;
                     anim.SetBool("Walking", false);
+                    StopFootStepSound();
                 }    
 
             }
@@ -98,6 +101,16 @@ namespace Margot
             }
             return KeyCode.None; // ��ȿ���� ���� Ű �ڵ�
 
+        }
+
+        void StopFootStepSound()
+        {
+            footStepSoundObj.SetActive(false);
+        }
+
+        void StartFootStepSound()
+        {
+            footStepSoundObj.SetActive(true);
         }
     }
 }
