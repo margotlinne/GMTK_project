@@ -30,6 +30,8 @@ namespace Margot
 
                         phoneAnim.VolumeDownAnimation();
 
+                        SfxManager.instance.VolDownSoundPlay();
+
                         if (manager.withNegativeLight)
                         {
                             Debug.Log("---volume down next to negative sound");
@@ -50,6 +52,7 @@ namespace Margot
 
                         phoneAnim.VolumeUpAnimation();
 
+                        SfxManager.instance.VolUpSoundPlay();
 
                         if (manager.withNegativeLight)
                         {

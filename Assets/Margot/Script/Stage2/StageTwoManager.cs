@@ -54,6 +54,8 @@ namespace Margot
         public GameObject UIPhoneImg;
         // -------------------------------------------------------------------->>>>>>
 
+
+
         
         void Awake()
         {
@@ -96,6 +98,7 @@ namespace Margot
                     if (interacted)
                     {
                         Destroy(phoneObj);
+                        SfxManager.instance.PhoneGrabSoundPlay();
                         pickedUpPhone = true;
                         HideInteractBox();
                         interacted = false;
@@ -172,6 +175,7 @@ namespace Margot
 
         public void ShockWaveForInteraction(int order)
         {
+            SfxManager.instance.ShockwaveNegSoundPlay();
            // Debug.Log("call shock wave for interaction" + order);
             shockWaveObj.transform.position = positiveBoxPos[order].position;
             shockWave.CallShockWave();
@@ -187,6 +191,7 @@ namespace Margot
 
         public void ShowInteractBox(int num, string keyCode)
         {
+            
            // Debug.Log("_------------------" + keyCode);
             showBox = true;
 
