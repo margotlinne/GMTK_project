@@ -152,4 +152,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 8201112526223759235}
-  speed: 0.03
+  speed: 0.01
+  startPosX: 0
+  endPosX: 0
