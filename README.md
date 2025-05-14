@@ -75,7 +75,9 @@ In our team some had full time job, some were in different time zone but we did 
 
 #### [Programming]
 <a href="https://github.com/margotlinne">Margot</a>
+
 <a href="https://github.com/choi-m-09">Choi</a>
+
 <a href="https://github.com/Username257">Gene</a>
 
 #### [Sound Design]
