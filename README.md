@@ -1,12 +1,25 @@
+# EmoScale
+
+## About
+
 ### "As always, you can interpret this theme however you like. Use it as a jumping off point, so get creative, think outside the box, and surprise us." 
 
 In line with this theme, the design goes beyond the simple concept of scaling objects up and down and delves into the multifaceted meaning of "Scale." The game ties the theme "Built to Scale" to human emotions, exploring how small emotional changes can have a significant psychological impact. The player takes on the role of exploring the inner worlds of individuals, addressing emotional issues faced by people of different ages. By using abilities to adjust size and gravity, the player helps resolve deep-seated emotional blocks within their hearts, ultimately leading to inner healing. The game mechanics are thoughtfully designed to reflect the concept of scale in a meaningful way.
 
+<br>
 
+## Information
+
+- Engine: Unity
+- Platform: WebGL
+- Team Size: 7
+- Time Frame: 4 days
 
 <br>
 
-## Stage 1
+## Introduction
+
+### Stage 1
 
 We always had a fear when we were young. There's a little girl holding her plushie in the corner of her dark room. "Go away you scary shadow monster!" Her toys and family photos feel like screaming like this for her she feels.
 
@@ -20,7 +33,7 @@ Collect all toys on shelves to defeat the monster with power of ❣TOY❣!!!
 
 <br>
 
-## Stage 2
+### Stage 2
 
 There's a boy.. who has trauma about getting bullied. Let him overcomes by interacting with the positive sound and ignoring the negative sound with volume scale up, and down. If you found all 4 sounds that you can interact with then stage clear.
 
@@ -34,7 +47,7 @@ Oh no! You found negative sound. Lower the volume, and let it disappear.
 
 <br>
 
-## Stage 3
+### Stage 3
 
 A woman in office, same boring life and she has lots of burdens like adults have in this world nowadays. Let's remove her burden from her shoulder.
 
@@ -52,7 +65,7 @@ Ticktack Ticktack! Knowing time flies is always stressing.  Stop the time!
 
 <br>
 
-## Stage 4
+### Stage 4
 
 Whoops! We couldn't make in time. But we'll share the art! We might continue finishing up this game later.
 
@@ -64,9 +77,10 @@ Whoops! We couldn't make in time. But we'll share the art! We might continue fin
 
 In our team some had full time job, some were in different time zone but we did our best. We feel like we could do better but overall we're very satisfied knowing that we could implement this much with such a limited time, 4 days.  Hope your all negative emotions get scaled down and light up your life!
 
----
+<br>
 
-### Collborators
+## Collborators
+
 #### [Game Design]
 <a href="https://github.com/misolee-IT">Miso</a>
 
